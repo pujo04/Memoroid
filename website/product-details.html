@@ -59,18 +59,18 @@
             id="ProductImg"
           />
 
-          <div class="small-img-row">
+          <div class="small-img-row" id="thumbnail-row">
             <div class="small-img-col">
-              <img src="./assets/images/gallery-1.jpg" class="small-img" />
+              <img src="" class="small-img" />
             </div>
             <div class="small-img-col">
-              <img src="./assets/images/gallery-2.jpg" class="small-img" />
+              <img src="" class="small-img" />
             </div>
             <div class="small-img-col">
-              <img src="./assets/images/gallery-3.jpg" class="small-img" />
+              <img src="" class="small-img" />
             </div>
             <div class="small-img-col">
-              <img src="./assets/images/gallery-4.jpg" class="small-img" />
+              <img src="" class="small-img" />
             </div>
           </div>
         </div>
@@ -89,78 +89,13 @@
           <h3>Product Details<i class="fa fa-indent"></i></h3>
           <br />
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit nemo
-            nam magnam rerum sunt explicabo! Distinctio ipsam doloremque nostrum
-            ipsum?
+            Produk memoroid adalah cetakan foto eksklusif dengan sentuhan klasik
+            dan premium. Cocok untuk hadiah atau kenangan spesial.
           </p>
         </div>
       </div>
     </div>
 
-    <!-- Title
-    <div class="small-container">
-      <div class="row row-2">
-        <h2>Related Products</h2>
-        <p>View More</p>
-      </div>
-    </div> -->
-
-    <!-- Similar Products
-
-    <div class="small-container">
-      <div class="row">
-        <div class="col-4">
-          <img src="./assets/images/product-9.jpg" alt="" />
-          <h4>Red Printed T-shirt</h4>
-          <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-o"></i>
-          </div>
-          <p>$50.00</p>
-        </div>
-
-        <div class="col-4">
-          <img src="./assets/images/product-10.jpg" alt="" />
-          <h4>Red Printed T-shirt</h4>
-          <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-half-o"></i>
-            <i class="fa fa-star-o"></i>
-          </div>
-          <p>$50.00</p>
-        </div>
-
-        <div class="col-4">
-          <img src="./assets/images/product-11.jpg" alt="" />
-          <h4>Red Printed T-shirt</h4>
-          <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-half-o"></i>
-          </div>
-          <p>$50.00</p>
-        </div>
-        <div class="col-4">
-          <img src="./assets/images/product-12.jpg" alt="" />
-          <h4>Red Printed T-shirt</h4>
-          <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-o"></i>
-          </div>
-          <p>$50.00</p>
-        </div>
-      </div>
-    </div> -->
 
     <!-- Footer -->
     <div class="footer">
@@ -214,19 +149,86 @@
     <!-- JS for Toggle menu -->
     <script src="./assets/js/toggleMenu.js"></script>
     <script>
-      // Ambil parameter dari URL
       const urlParams = new URLSearchParams(window.location.search);
+      const productId = urlParams.get("id") || "default";
       const productName = urlParams.get("name") || "Unknown Product";
-      const productPrice = urlParams.get("price") || "Rp. 0";
+      const productPrice = urlParams.get("price") || "0";
 
-      // Update halaman dengan data dari URL
+      // Tampilkan nama dan harga
       document.getElementById("product-name").textContent = productName;
       document.getElementById("product-price").textContent =
         "Rp " + productPrice;
+      document.getElementById("product-name").textContent = productName;
 
-      // Update link beli di WhatsApp
-      const waLink = `https://wa.me/6285380299293?text=Halo,saya ingin membeli ${productName} seharga Rp${productPrice} . Apakah stok masih tersedia?`;
+      // WhatsApp Link
+      const waLink = "https://wa.me/6285380299293?text=Halo, saya ingin membeli ${productName} seharga Rp${productPrice}. Apakah stok masih tersedia?";
       document.getElementById("buy-link").href = waLink;
+
+      // Gambar galeri berdasarkan produk ID
+      const galleryImages = {
+        "memoroid-gold": [
+          "./assets/images/Gold.jpg",
+          "./assets/images/Gold1.jpg",
+          "./assets/images/Gold2.jpg",
+          "./assets/images/Gold3.jpg",
+          "./assets/images/Gold4.jpg",
+        ],
+        "memoroid-platinum": [
+          "./assets/images/Platinum.jpg",
+          "./assets/images/Platinum1.jpg",
+          "./assets/images/Platinum2.jpg",
+          "./assets/images/Platinum3.jpg",
+        ],
+        "memoroid-silver": [
+          "./assets/images/Silver.jpg",
+          "./assets/images/Silver1.jpg",
+          "./assets/images/Silver2.jpg",
+          "./assets/images/Silver3.jpg",
+        ],
+        "memoroid-black": [
+          "./assets/images/Black.jpg",
+          "./assets/images/Black1.jpg",
+          "./assets/images/Black2.jpg",
+          "./assets/images/Black3.jpg",
+        ],
+        default: [
+          "./assets/images/gallery-1.jpg",
+          "./assets/images/gallery-2.jpg",
+          "./assets/images/gallery-3.jpg",
+          "./assets/images/gallery-4.jpg",
+        ],
+      };
+
+      const images = galleryImages[productId] || galleryImages["default"];
+
+      // Update gambar utama
+      const productImg = document.getElementById("ProductImg");
+      productImg.src = images[0];
+
+      // Update gambar kecil
+      // Dapatkan container thumbnail
+      const thumbnailRow = document.getElementById("thumbnail-row");
+
+      // Bersihkan dulu jika ada isinya
+      thumbnailRow.innerHTML = "";
+
+      // Tambahkan gambar kecil secara dinamis
+      images.forEach((imgSrc, index) => {
+        const colDiv = document.createElement("div");
+        colDiv.classList.add("small-img-col");
+
+        const img = document.createElement("img");
+        img.src = imgSrc;
+        img.classList.add("small-img");
+        img.onclick = () => (productImg.src = imgSrc);
+
+        colDiv.appendChild(img);
+        thumbnailRow.appendChild(colDiv);
+      });
+
+      if (!urlParams.get("id")) {
+        alert("Parameter produk (id) tidak ditemukan di URL.");
+      }
     </script>
   </body>
 </html>
