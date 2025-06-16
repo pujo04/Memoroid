@@ -127,7 +127,10 @@
               <li>Join Affiliate</li>
             </ul>
           </div>
-
+          <audio hidden autoplay loop>
+            <source src="assets\backsound.mp3" type="audio/mpeg" />
+            BACKSOUND MENDUKUNG AUDIO
+          </audio>
           <div class="footer-col-4">
             <h3>Follow us</h3>
             <ul>
@@ -160,8 +163,7 @@
       document.getElementById("product-name").textContent = productName;
 
       // WhatsApp Link
-      const waLink =
-        `https://wa.me/6285183202292?text=Halo, saya ingin membeli ${productName} seharga Rp${productPrice}. Apakah stok masih tersedia?`;
+      const waLink = `https://wa.me/6285183202292?text=Halo, saya ingin membeli ${productName} seharga Rp${productPrice}. Apakah stok masih tersedia?`;
       document.getElementById("buy-link").href = waLink;
 
       // Gambar galeri berdasarkan produk ID
